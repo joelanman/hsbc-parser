@@ -1,4 +1,4 @@
-HSBC parser
+HSBC Statement Parser - HTML to CSV
 ===========
 
 Converts HSBC monthly statement HTML to CSV for spreadsheets
@@ -14,7 +14,7 @@ Steps:
 5. In the browser, click `File -> Save as`, and save the HTML to the `resources/statements` folder.
 6. In the terminal, run `node parseHTML.js` - this will generate a CSV file in the resources folder.
 
-Open the CSV in a spreadsheet app such as Excel or Google drive.
+Open the CSV in a spreadsheet app such as Excel or Google Sheets.
 
 You can save as many statements to the `resources/statements` folder as you want, the script will make one CSV file out of all them.
 
