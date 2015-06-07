@@ -1,4 +1,4 @@
-hsbc-parser
+HSBC parser
 ===========
 
 Converts HSBC monthly statement HTML to CSV for spreadsheets
@@ -17,3 +17,5 @@ Steps:
 Open the CSV in a spreadsheet app such as Excel or Google drive.
 
 You can save as many statements to the `resources/statements` folder as you want, the script will make one CSV file out of all them.
+
+This is not endorsed in any way by HSBC - use at your own risk.
