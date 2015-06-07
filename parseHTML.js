@@ -1,5 +1,5 @@
 var fs = require('fs'),
-	$ = require('jquery'),
+	$ = require('jquery')(require("jsdom").jsdom().parentWindow);
 	moment = require('moment');
 
 String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
