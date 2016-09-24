@@ -12,6 +12,8 @@ var parseStatement = function(filename, callback){
 
 	fs.readFile('resources/statements/'+filename, 'UTF8', function(err, data){
 
+		console.log('readFile:        ' + filename);
+
 		if (err){
 			console.log(err);
 			return(err);
@@ -35,8 +37,6 @@ var parseStatement = function(filename, callback){
 			}
 
 		});
-
-		console.log('year:' + year);
 
 		var $table = $body.find('.hsbcMainContent table[summary="This table contains a statement of your account"]');
 
@@ -74,8 +74,6 @@ var parseStatement = function(filename, callback){
 
 		});
 
-		console.log('newYear: ' + newYear);
-
 		if (newYear){
 			transactions.forEach(function(row, index, array){
 				if (row.date.format('M') == 12){
@@ -93,7 +91,7 @@ var makeCSV = function(){
 	var csv = 'date,type,title,paid out,paid in,balance';
 
 	allTransactions.forEach(function(row, index, array){
-		csv += "\n" + row.dateFormatted + "," + row.type + "," + row.title + "," + row.paidOut + "," + row.paidIn + "," + row.balance;
+		csv += '\n"' + row.dateFormatted + '","' + row.type + '","' + row.title + '","' + row.paidOut + '","' + row.paidIn + '","' + row.balance + '"';
 	});
 
 	fs.writeFile('resources/statements.csv', csv, function(err){
@@ -102,7 +100,7 @@ var makeCSV = function(){
 			console.log(err);
 			return(err);
 		}
-		
+
 		console.log('done!');
 
 	});
@@ -133,12 +131,18 @@ var statementParsed = function(transactions){
 
 statements.forEach(function(filename, index, array){
 
-	if (filename.indexOf('.html') != filename.length - '.html'.length){
-		array.splice(index,1);
+	// ignore any files that aren't html
+
+	var extension = filename.split('.').pop();
+
+	if (extension == 'html' || extension == 'htm'){
+		return;
 	}
+
+	array.splice(index,1);
+
 });
 
 statements.forEach(function(filename, index, array){
 	parseStatement(filename, statementParsed);
 });
-
